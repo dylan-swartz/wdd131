@@ -1,0 +1,77 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.7;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 3rem 1rem;
+}
+
+main {
+    width: 100%;
+    max-width: 700px;
+}
+
+.card {
+    width: 100%;
+    max-width: 700px;
+    padding: 3rem 3.5rem;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: normal;
+    letter-spacing: 0.1em;
+    color: #000000;
+    margin-bottom: 0.75rem;
+}
+
+#schoolname {
+    text-align: center;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: #006EB6;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #ccc;
+}
+
+p {
+    margin-bottom: 1rem;
+    font-size: 0.97rem;
+}
+
+.intro-italic {
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+ol {
+    margin-left: 1.25rem;
+    padding-left: 0.5rem;
+}
+
+ol li {
+    margin-bottom: 1rem;
+    font-size: 0.97rem;
+    padding-left: 0.5rem;
+}
+
+footer {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+#byui-logo {
+    max-width: 120px;
+}
