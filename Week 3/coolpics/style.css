@@ -1,0 +1,166 @@
+/* Mobile First Design*/
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+ 
+/* Mobile Size. Screen size < 768px */
+body {
+  font-family: Roboto, sans-serif;
+}
+
+header,
+footer {
+  max-width: 2000px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  color: white;
+  background-color: rgb(68, 129, 204);
+}
+
+main {
+  display: grid;
+  grid-template-columns: auto;
+  max-width: 2000px;
+  margin: 0 auto;
+
+  background-color: #cccccc;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+}
+
+h2{
+    text-align: center;
+    font-size: 2em;
+}
+
+h3{
+    text-align: center;
+    font-size: 1.5em;
+}
+
+div {
+  color: black;
+  margin: auto;
+  padding: 0 1rem;
+}
+
+img {
+    width: 23em;
+    height: 23em;
+    object-fit: cover;
+    border: 0.3em solid white;
+    border-radius: 0.7%;
+    box-shadow: 2px 2px 5px;
+    margin: 2em;
+}
+
+.img{
+    display: grid;
+    place-items: center;
+    margin: 1rem auto;
+}
+
+header p{
+    text-align: center;
+}
+nav a {
+    padding: 20px;
+    color: white;
+    display: none; /*In mobile size, the nav bar won't be displayed */
+}
+nav a:hover {
+    text-decoration: none;
+    color: black;
+}
+.menu-btn {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+footer {
+    text-align: center;
+}
+
+nav.open a {
+    display: block;
+}
+      
+/* Tablet Size. Screen size > 768px */
+@media screen and (min-width: 768px) {
+    main {
+       display: grid;
+    }
+
+    .img{
+        grid-template-columns: auto auto;
+    }
+    
+    img{
+        width: 18rem;
+        height: 18rem;
+        object-fit: cover;
+        border: 0.3em solid white;
+        border-radius: 0.7%;
+        box-shadow: 2px 2px 5px;
+        margin: 2em;
+    }
+
+    .menu-btn {
+        display: none;
+    }
+    
+    nav {
+        display: flex;
+        justify-content: center;
+        /* align-self: flex-end; */
+    }
+
+    nav a {
+        padding: 20px;
+        color: black;
+        display: none;
+        align-self: flex-end;
+    }
+}
+
+/* Desktop Size. Screen size > 1024px */
+@media screen and (min-width: 1024px){
+    main {
+        display: grid;
+        margin: 0 auto;
+        max-width: 2000px;
+        border: 1px solid #ccc;
+        padding: 1rem;
+        color: white;
+    }
+
+    .img {
+        grid-template-columns: auto auto auto;
+    }
+
+    img {
+        width: 15rem;
+        height: 15rem;
+        object-fit: cover;
+        border: 0.3em solid white;
+        border-radius: 0.7%;
+        box-shadow: 2px 2px 5px;
+        margin: 2em;
+    }
+
+    nav a {
+        padding: 20px;
+        font-size: 1.5em;
+        color: white;
+        display: flex; /*In mobile size, the nav bar won't be displayed */
+    }
+
+    .menu-title {
+        display: none
+    }
+
+}
