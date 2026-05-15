@@ -1,3 +1,4 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 body {
@@ -26,17 +27,17 @@ section {
 nav a {
     padding: 20px;
     color: black;
+    display: block;
     text-align: center;
     text-decoration: none;
-    display: block;
-    border-top: 1px solid grey;
+    border-top: 1px solid gray;
+}
+.hide {
+    display: none;
 }
 nav a:hover {
     text-decoration: none;
     color: #616061;
-}
-.hide a {
-    display: none;
 }
 .menu-btn {
     cursor: pointer;
@@ -48,6 +49,16 @@ nav a:hover {
     height: 4px;
     background-color: black;
     margin: 5px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+  transform: translate(0, 8.5px) rotate(-45deg);
+}
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  transform: translate(0, -8.5px) rotate(45deg);
 }
 footer {
     text-align: center;
@@ -56,30 +67,21 @@ footer {
     main {
         display: grid;
         grid-template-columns: 1fr 1fr;
-    }
+    }  
     .menu-btn {
         display: none;
     }
     nav a {
         display: inline;
-        border-top: none;
     }
     nav {
-        display: block;
         text-align: right;
     }
 }
+
 @media screen and (min-width: 1000px) {
     main {
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
-.change .bar1 {
-    transform: translate(0, 11px) rotate(-45deg);
-}
-.change .bar2 {
-    opacity: 0;
-}
-.change .bar3 {
-    transform: translate(0, -11px) rotate(45deg);
-}
+                
