@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kembermedia Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <img src="transparentshouldbe.png" alt="Kembermedia logo" class="logo" />
+  </header>
+
+  <main>
+    <section class="filter-bar" id="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <!-- buttons get built by JS, but a fallback "All" button lives here in case JS fails to load -->
+      <button class="filter-btn active" data-category="all">All</button>
+    </section>
+
+    <section class="card-grid" id="card-grid">
+      <!-- container cards get injected here by script.js -->
+      <p class="loading-msg" id="loading-msg">Loading containers...</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Kembermedia &middot; self-hosted dashboard</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
