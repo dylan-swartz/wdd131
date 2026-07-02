@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DockHub - App Plan</title>
+  <link rel="stylesheet" href="appplan.css" />
+</head>
+<body>
+  <header>
+    <h1>DockHub - App Plan</h1>
+    <p>Dylan Swartz</p>
+  </header>
+
+  <main>
+    <hr />
+    <h2>Overview</h2>
+
+    <h3>Purpose</h3>
+    <p>
+      I run a home server with a bunch of Docker containers on it (media
+      apps, network tools, utilities, etc.), and right now I just have an
+      auto-generated homepage that lists them all with no real
+      organization. For my final project I want to build my own
+      dashboard page where I can filter my containers by category and
+      see whether each one is actually up and running or not.
+    </p>
+
+    <h3>Audience</h3>
+    <p>
+      This is mainly for myself since I'm the one managing the server,
+      but really it could be useful for anyone else who self-hosts a
+      bunch of apps and wants an easier way to get to them than
+      scrolling through a plain list of links.
+    </p>
+
+    <h3>Dynamic elements</h3>
+    <p>
+      I'll make an array of objects, one for each container, with the
+      name, url, and category. I'll use <code>.map()</code> to loop
+      through that array and build the HTML for each container
+      automatically instead of typing it out by hand. I'll also add
+      filter buttons (like "Media" or "Utility") so clicking one filters
+      the array down to just that category. If I have time, I want to
+      add a status check that pings each container and shows a
+      green/yellow/red dot depending on if it's running, stopped, or not
+      responding.
+    </p>
+
+    <hr />
+    <h2>Branding</h2>
+    <h3>Website Logo</h3>
+    <!-- Replace this with some sort of logo for your site. A logo can be as simple as the name of your site in a nice font :) -->
+    <img src="transparentshouldbe.png" alt="DockHub logo" />
+
+    <hr />
+    <h2>Style Guide</h2>
+    <h3>Color Palette</h3>
+    <!-- Pick your colors at coolors.co, then paste the palette URL below and fill in the hex codes in the table -->
+    Palette URL: 
+    <a href="#" target="_blank">[https://coolors.co/1a1625-7c3aed-a78bfa-f4f1fa-2a2438]</a>
+
+    <table class="colors">
+      <tr>
+        <th>Use</th>
+        <th>Color</th>
+        <th>Hex Code</th>
+      </tr>
+      <tr>
+        <td>Primary</td>
+        <td style="background-color: #7c3aed;"></td>
+        <td>#7c3aed</td>
+      </tr>
+      <tr>
+        <td>Secondary</td>
+        <td style="background-color: #a78bfa;"></td>
+        <td>#a78bfa</td>
+      </tr>
+      <tr>
+        <td>Accent</td>
+        <td style="background-color: #f4f1fa;"></td>
+        <td>#f4f1fa</td>
+      </tr>
+    </table>
+
+    <h3>Pseudocode for your project</h3>
+    <pre>
+1. Make an array with all my containers in it (name, url, category)
+
+2. When the page loads:
+   - Loop through the array
+   - For each container, build a little card with its name,
+     category, and a link to open it
+   - Put all the cards on the page
+
+3. Filter buttons:
+   - When I click a category button, filter the array down to just
+     that category
+   - Rebuild the cards using only the filtered list
+   - If I click "All", show everything again
+
+4. (Stretch goal) Status check:
+   - Every so often, check if each container is actually reachable
+   - Update the card to show green/yellow/red depending on status
+   - If the check fails for some reason, just show it as unknown
+     instead of crashing the page
+    </pre>
+
+    <h3>Wireframes</h3>
+
+    <h3>Landing page</h3>
+    <p>
+      Single page dashboard with a filter bar at the top and a
+      responsive card grid below, one card per container.
+    </p>
+    <img src="wireframe-home.svg" alt="home page wireframe" />
+  </main>
+</body>
+</html>
