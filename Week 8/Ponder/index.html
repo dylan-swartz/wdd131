@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="main.js" defer></script> 
+    <link rel="stylesheet" href="style.css">
+    <!-- Don't forget to add 'defer' keyword to run all the js code first-->
+</head>
+<body>
+    <h1 id="courseName">Student Enrollment Editor</h1>
+    <h2 id="courseCode"></h2>
+    <main>
+        <label id="sectionNumberInput" for="sectionNumber">Section Number: </label>
+        <input id="sectionNumber" />
+        <button id="addStudentBtn">Add Student</button>
+        <button id="removeStudentBtn">Remove Student</button>
+    
+        <table id="classTable">
+        <thead>
+            <tr>
+            <th id="tbSection">Section#</th>
+            <th id="tbRoom">Room#</th>
+            <th id="tbEnrolled">#Enrolled</th>
+            <th id="tbDays">Days</th>
+            <th id="tbInstructor">Instructor</th>
+            </tr>
+        </thead>
+        <tbody id="sections"></tbody>
+        </table>    
+    </main>
+</body>
+</html>
