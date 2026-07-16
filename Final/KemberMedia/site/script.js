@@ -1,21 +1,58 @@
+// Dark/Light mode toggle
+// Reads the saved preference (if any) on load, applies it, and lets
+// the button flip between the two - saving the new choice each time.
+
+const root = document.documentElement;
+const toggleBtn = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
+const logoImg = document.getElementById("logo-img");
+
+function applyTheme(theme) {
+  if (theme === "light") {
+    root.setAttribute("data-theme", "light");
+    themeIcon.textContent = "☀️";
+    logoImg.src = "logo-light.png";
+  } else {
+    root.removeAttribute("data-theme");
+    themeIcon.textContent = "🌙";
+    logoImg.src = "logo-transparent.png";
+  }
+}
+
+// on load: use saved preference, or fall back to the user's system setting
+const saved = localStorage.getItem("kembermedia-theme");
+if (saved) {
+  applyTheme(saved);
+} else {
+  const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+  applyTheme(prefersLight ? "light" : "dark");
+}
+
+toggleBtn.addEventListener("click", () => {
+  const isLight = root.getAttribute("data-theme") === "light";
+  const next = isLight ? "dark" : "light";
+  applyTheme(next);
+  localStorage.setItem("kembermedia-theme", next);
+});
 // 1. Array of container objects (name, url, category)
 const containers = [
-  { name: "Jellyfin", url: "http://192.168.0.201:8096", category: "media" },
-  { name: "Immich", url: "http://192.168.0.201:2283", category: "media" },
-  { name: "Jellyseerr", url: "http://192.168.0.201:5055", category: "media" },
-  { name: "Sonarr", url: "http://192.168.0.201:8989", category: "media" },
-  { name: "Radarr", url: "http://192.168.0.201:7878", category: "media" },
-  { name: "Prowlarr", url: "http://192.168.0.201:9696", category: "media" },
-  { name: "qBittorrent", url: "http://192.168.0.201:8080", category: "media" },
-  { name: "Bazarr", url: "http://192.168.0.201:6767", category: "media" },
-  { name: "Pi-hole", url: "http://192.168.0.201:8081/admin", category: "networking" },
-  { name: "Cloudflared", url: "#", category: "networking" },
-  { name: "Portainer", url: "http://192.168.0.201:9000", category: "utility" },
-  { name: "Filebrowser", url: "http://192.168.0.201:8082", category: "utility" },
-  { name: "Homepage", url: "http://192.168.0.201:3000", category: "utility" },
-  { name: "Dozzle", url: "http://192.168.0.201:8083", category: "utility" },
-  { name: "Uptime Kuma", url: "http://192.168.0.201:3001", category: "utility" },
+  { name: "Jellyfin", url: "http://192.168.0.201:8096", category: "media", icon: "jellyfin" },
+  { name: "Immich", url: "http://192.168.0.201:2283", category: "media", icon: "immich" },
+  { name: "Jellyseerr", url: "http://192.168.0.201:5055", category: "media", icon: "jellyseerr" },
+  { name: "Sonarr", url: "http://192.168.0.201:8989", category: "media", icon: "sonarr" },
+  { name: "Radarr", url: "http://192.168.0.201:7878", category: "media", icon: "radarr" },
+  { name: "Prowlarr", url: "http://192.168.0.201:9696", category: "media", icon: "prowlarr" },
+  { name: "qBittorrent", url: "http://192.168.0.201:8080", category: "media", icon: "qbittorrent" },
+  { name: "Bazarr", url: "http://192.168.0.201:6767", category: "media", icon: "bazarr" },
+  { name: "Pi-hole", url: "http://192.168.0.201:8081/admin", category: "networking", icon: "pi-hole" },
+  { name: "Cloudflared", url: "#", category: "networking", icon: "cloudflared" },
+  { name: "Portainer", url: "http://192.168.0.201:9000", category: "utility", icon: "portainer" },
+  { name: "Filebrowser", url: "http://192.168.0.201:8090", category: "utility", icon: "filebrowser" },
+  { name: "Uptime Kuma", url: "http://192.168.0.201:3001", category: "utility", icon: "uptime-kuma" },
 ];
+
+// CDN base for service logos (Dashboard Icons project - homarr-labs/dashboard-icons)
+const ICON_BASE = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg";
 
 const cardGrid = document.getElementById("card-grid");
 const filterBar = document.getElementById("filter-bar");
@@ -57,9 +94,10 @@ function renderCards(activeCategory = "all") {
       return `
         <div class="card">
           <div class="card-top">
-            <span class="card-name">${container.name}</span>
+            <img class="card-icon" src="${ICON_BASE}/${container.icon}.svg" alt="${container.name} icon" onerror="this.style.display='none'" />
             <span class="status-dot ${status}"></span>
           </div>
+          <span class="card-name">${container.name}</span>
           <span class="card-category">${container.category}</span>
           <span class="card-status-text">status: ${status}</span>
           <a class="card-link" href="${container.url}" target="_blank">Open &rarr;</a>
@@ -93,8 +131,7 @@ async function checkStatuses() {
       statusMap[item.name] = item.status;
     });
   } catch (err) {
-    // 5. No status API available (e.g. running this as a static demo) -
-    // fill in a plausible demo status so the UI still has something to show
+    // Makes the status random for demo purposes if the API isn't available
     containers.forEach((c) => {
       if (statusMap[c.name] === "unknown") {
         const demoStatuses = ["running", "running", "running", "stopped", "unavailable"];

@@ -1,0 +1,283 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #1a1625;
+  --panel: #2a2438;
+  --primary: #7c3aed;
+  --secondary: #a78bfa;
+  --text: #f4f1fa;
+  --muted: #9d93b3;
+  --running: #22c55e;
+  --stopped: #eab308;
+  --unavailable: #ef4444;
+  --unknown: #6b7280;
+}
+
+html[data-theme="light"] {
+  --bg: #f4f1fa;
+  --panel: #ffffff;
+  --primary: #7c3aed;
+  --secondary: #6d28d9;
+  --text: #1a1625;
+  --muted: #6b6480;
+}
+
+/* MOBILE FIRST STYLES*/
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 15px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.site-header {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--panel);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.logo {
+  height: 40px;
+  max-width: 60vw;
+  object-fit: contain;
+}
+
+.theme-toggle {
+  background-color: var(--panel);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--primary);
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 16px 40px;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.filter-label {
+  color: var(--muted);
+  margin-right: 4px;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.filter-btn {
+  background-color: var(--panel);
+  color: var(--text);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.15s ease;
+}
+
+.filter-btn:hover {
+  background-color: #3a3250;
+}
+
+.filter-btn.active {
+  background-color: var(--primary);
+}
+
+/* single column by default*/
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.loading-msg {
+  color: var(--muted);
+}
+
+.card {
+  background-color: var(--panel);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.card-icon {
+  width: 36px !important;
+  height: 36px !important;
+  max-width: 36px !important;
+  object-fit: contain;
+  border: none;
+  border-radius: 0;
+  margin-top: 0;
+}
+
+.card-name {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 4px;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.status-dot.running {
+  background-color: var(--running);
+}
+
+.status-dot.stopped {
+  background-color: var(--stopped);
+}
+
+.status-dot.unavailable {
+  background-color: var(--unavailable);
+}
+
+.status-dot.unknown {
+  background-color: var(--unknown);
+}
+
+.card-category {
+  color: var(--secondary);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.card-status-text {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.card-link {
+  margin-top: 8px;
+  align-self: flex-start;
+  background-color: var(--primary);
+  color: var(--text);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.card-link:hover {
+  background-color: #6d28d9;
+}
+
+.site-footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+  padding: 16px;
+  border-top: 1px solid var(--panel);
+}
+
+/*TABLET SIZING*/
+@media (min-width: 600px) {
+  body {
+    font-size: 16px;
+  }
+
+  .site-header {
+    padding: 18px 24px;
+  }
+
+  .logo {
+    height: 52px;
+    max-width: none;
+  }
+
+  main {
+    padding: 24px 24px 50px;
+  }
+
+  .filter-label {
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .card-name {
+    font-size: 1.05rem;
+  }
+}
+
+/*DESKTOP*/
+@media (min-width: 900px) {
+  .site-header {
+    padding: 20px 30px;
+  }
+
+  .logo {
+    height: 60px;
+  }
+
+  main {
+    padding: 20px 30px 60px;
+  }
+
+  .filter-bar {
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .card-icon {
+    width: 40px !important;
+    height: 40px !important;
+    max-width: 40px !important;
+  }
+}
