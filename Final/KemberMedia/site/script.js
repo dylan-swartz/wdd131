@@ -45,7 +45,6 @@ const containers = [
   { name: "qBittorrent", url: "http://192.168.0.201:8080", category: "media", icon: "qbittorrent", status: "running" },
   { name: "Bazarr", url: "http://192.168.0.201:6767", category: "media", icon: "bazarr", status: "running" },
   { name: "Pi-hole", url: "http://192.168.0.201:8081/admin", category: "networking", icon: "pi-hole", status: "running" },
-  { name: "Cloudflared", url: "#", category: "networking", icon: "cloudflared", status: "running" },
   { name: "Portainer", url: "http://192.168.0.201:9000", category: "utility", icon: "portainer", status: "running" },
   { name: "Filebrowser", url: "http://192.168.0.201:8090", category: "utility", icon: "filebrowser", status: "running" },
   { name: "Uptime Kuma", url: "http://192.168.0.201:3001", category: "utility", icon: "uptime-kuma", status: "running" },
