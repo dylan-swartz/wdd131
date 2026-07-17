@@ -36,19 +36,19 @@ toggleBtn.addEventListener("click", () => {
 });
 // 1. Array of container objects (name, url, category)
 const containers = [
-  { name: "Jellyfin", url: "http://192.168.0.201:8096", category: "media", icon: "jellyfin" },
-  { name: "Immich", url: "http://192.168.0.201:2283", category: "media", icon: "immich" },
-  { name: "Jellyseerr", url: "http://192.168.0.201:5055", category: "media", icon: "jellyseerr" },
-  { name: "Sonarr", url: "http://192.168.0.201:8989", category: "media", icon: "sonarr" },
-  { name: "Radarr", url: "http://192.168.0.201:7878", category: "media", icon: "radarr" },
-  { name: "Prowlarr", url: "http://192.168.0.201:9696", category: "media", icon: "prowlarr" },
-  { name: "qBittorrent", url: "http://192.168.0.201:8080", category: "media", icon: "qbittorrent" },
-  { name: "Bazarr", url: "http://192.168.0.201:6767", category: "media", icon: "bazarr" },
-  { name: "Pi-hole", url: "http://192.168.0.201:8081/admin", category: "networking", icon: "pi-hole" },
-  { name: "Cloudflared", url: "#", category: "networking", icon: "cloudflared" },
-  { name: "Portainer", url: "http://192.168.0.201:9000", category: "utility", icon: "portainer" },
-  { name: "Filebrowser", url: "http://192.168.0.201:8090", category: "utility", icon: "filebrowser" },
-  { name: "Uptime Kuma", url: "http://192.168.0.201:3001", category: "utility", icon: "uptime-kuma" },
+  { name: "Jellyfin", url: "http://192.168.0.201:8096", category: "media", icon: "jellyfin", status: "running" },
+  { name: "Immich", url: "http://192.168.0.201:2283", category: "media", icon: "immich", status: "running" },
+  { name: "Jellyseerr", url: "http://192.168.0.201:5055", category: "media", icon: "jellyseerr", status: "running" },
+  { name: "Sonarr", url: "http://192.168.0.201:8989", category: "media", icon: "sonarr", status: "running" },
+  { name: "Radarr", url: "http://192.168.0.201:7878", category: "media", icon: "radarr", status: "running" },
+  { name: "Prowlarr", url: "http://192.168.0.201:9696", category: "media", icon: "prowlarr", status: "running" },
+  { name: "qBittorrent", url: "http://192.168.0.201:8080", category: "media", icon: "qbittorrent", status: "running" },
+  { name: "Bazarr", url: "http://192.168.0.201:6767", category: "media", icon: "bazarr", status: "running" },
+  { name: "Pi-hole", url: "http://192.168.0.201:8081/admin", category: "networking", icon: "pi-hole", status: "running" },
+  { name: "Cloudflared", url: "#", category: "networking", icon: "cloudflared", status: "running" },
+  { name: "Portainer", url: "http://192.168.0.201:9000", category: "utility", icon: "portainer", status: "running" },
+  { name: "Filebrowser", url: "http://192.168.0.201:8090", category: "utility", icon: "filebrowser", status: "running" },
+  { name: "Uptime Kuma", url: "http://192.168.0.201:3001", category: "utility", icon: "uptime-kuma", status: "running" },
 ];
 
 // CDN base for service logos (Dashboard Icons project - homarr-labs/dashboard-icons)
@@ -57,9 +57,10 @@ const ICON_BASE = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg";
 const cardGrid = document.getElementById("card-grid");
 const filterBar = document.getElementById("filter-bar");
 
-// keep a running record of each container's current status by name
+// keep a running record of each container's current status by name,
+// starting from the status you set on each container object above
 const statusMap = {};
-containers.forEach((c) => (statusMap[c.name] = "unknown"));
+containers.forEach((c) => (statusMap[c.name] = c.status || "unknown"));
 
 // 2. Build category list for filter buttons (All + each unique category)
 function getCategories() {
@@ -94,7 +95,7 @@ function renderCards(activeCategory = "all") {
       return `
         <div class="card">
           <div class="card-top">
-            <img class="card-icon" src="${ICON_BASE}/${container.icon}.svg" alt="${container.name} icon" onerror="this.style.display='none'" />
+            <img class="card-icon" src="${ICON_BASE}/${container.icon}.svg" alt="${container.name} icon" width="40" height="40" onerror="this.style.display='none'" />
             <span class="status-dot ${status}"></span>
           </div>
           <span class="card-name">${container.name}</span>
@@ -120,7 +121,7 @@ function handleFilterClick(category) {
 }
 
 // 4. Status check (stretch goal) - tries a real status API,
-// falls back to a demo/random status if there's no server to answer it
+// falls back to a random demo status if there's no server to answer it
 async function checkStatuses() {
   try {
     const response = await fetch("/api/status");
@@ -131,12 +132,11 @@ async function checkStatuses() {
       statusMap[item.name] = item.status;
     });
   } catch (err) {
-    // Makes the status random for demo purposes if the API isn't available
+    // 5. No status API available (e.g. running this as a static demo) -
+    // assign a random demo status so the UI still has something to show
+    const demoStatuses = ["running", "running", "running", "stopped", "unavailable"];
     containers.forEach((c) => {
-      if (statusMap[c.name] === "unknown") {
-        const demoStatuses = ["running", "running", "running", "stopped", "unavailable"];
-        statusMap[c.name] = demoStatuses[Math.floor(Math.random() * demoStatuses.length)];
-      }
+      statusMap[c.name] = demoStatuses[Math.floor(Math.random() * demoStatuses.length)];
     });
   }
 
