@@ -24,6 +24,13 @@ html[data-theme="light"] {
   --muted: #6b6480;
 }
 
+/* ==========================================================
+   MOBILE-FIRST BASE STYLES
+   These target small phone screens by default. Anything that
+   needs to change for bigger screens gets overridden further
+   down inside @media (min-width: ...) blocks.
+   ========================================================== */
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -107,10 +114,17 @@ main {
 .filter-btn.active {
   background-color: var(--primary);
 }
+
+/* single column by default - the safest, most readable layout
+   on a narrow phone screen.
+   min-height reserves roughly the space the final grid will take up,
+   so the page doesn't jump when JS replaces the "Loading..." message
+   with the real cards (this is what was causing the layout shift) */
 .card-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
+  min-height: 2600px;
 }
 
 .loading-msg {
@@ -209,7 +223,10 @@ main {
   border-top: 1px solid var(--panel);
 }
 
-/*TABLET*/
+/* ==========================================================
+   TABLET AND UP (600px+)
+   Room for two columns, bigger logo, more breathing room
+   ========================================================== */
 @media (min-width: 600px) {
   body {
     font-size: 16px;
@@ -236,6 +253,7 @@ main {
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 18px;
+    min-height: 1500px;
   }
 
   .card-name {
@@ -243,7 +261,11 @@ main {
   }
 }
 
-/*DESKTOP*/
+/* ==========================================================
+   DESKTOP (900px+)
+   Three columns, full-size spacing to match the original
+   wireframe layout
+   ========================================================== */
 @media (min-width: 900px) {
   .site-header {
     padding: 20px 30px;
@@ -265,6 +287,7 @@ main {
   .card-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    min-height: 1100px;
   }
 
   .card {
@@ -277,6 +300,10 @@ main {
     max-width: 40px !important;
   }
 }
+
+/* visually hides content while keeping it available to screen readers -
+   used for the page's real <h1> since the logo image already shows
+   the title visually */
 .visually-hidden {
   position: absolute;
   width: 1px;
